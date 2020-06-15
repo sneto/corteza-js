@@ -30,6 +30,7 @@ export class ModuleField {
   public isPrivate = false
   public isMulti = false
   public isSystem = false
+  public isWritable = false
 
   public options: object = {}
 
@@ -50,12 +51,13 @@ export class ModuleField {
     Apply(this, f, CortezaID, 'fieldID')
     Apply(this, f, String, 'name', 'label', 'kind')
     Apply(this, f, Number, 'maxLength')
-    Apply(this, f, Boolean, 'isRequired', 'isPrivate', 'isMulti', 'isSystem')
+    Apply(this, f, Boolean, 'isRequired', 'isPrivate', 'isMulti', 'isSystem', 'isWritable')
 
     // Make sure field is align with it's capabilities
     if (!this.cap.multi) this.isMulti = false
     if (!this.cap.required) this.isRequired = false
     if (!this.cap.private) this.isPrivate = false
+    if (!this.cap.writable) this.isWritable = false
 
     if (f.defaultValue && Array.isArray(f.defaultValue)) {
       /**
