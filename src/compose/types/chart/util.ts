@@ -162,8 +162,18 @@ dimensionFunctions.push(...[
   {
     text: 'quarter', // fetch monthly aggregation but tell renderer to group by quarter
     value: 'QUARTER',
-    convert: (f: string) => `DATE_FORMAT(${f}, '%Y-%m-01')`,
-    time: { unit: 'quarter', minUnit: 'quarter', round: true },
+    // convert: (f: string) => `CONCAT(QUARTER(${f}), DATE_FORMAT(${f}, '%Y'))`,
+    // convert: (f: string) => `DATE_FORMAT(${f}, '%Y-%m-01')`,
+    convert: (f: string) => `QUARTER(${f})`,
+    time: {
+      unit: 'quarter',
+      minUnit: 'quarter',
+      round: true,
+      tooltipFormat: '[Q]Q',
+      displayFormats: {
+        quarter: '[Q]Q',
+      },
+    },
   },
 
   {
